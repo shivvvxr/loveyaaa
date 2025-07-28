@@ -110,6 +110,17 @@
       let pivot = { x: 100, y: 250 }; // bow rotation point
       aim({ clientX: 320, clientY: 300 }); // set up start drag event
       window.addEventListener("mousedown", draw);
+      svg.addEventListener("touchstart", function(e) {
+      e.preventDefault(); // Prevent scroll
+      draw(e.touches[0]);
+      });
+      svg.addEventListener("touchmove", function(e) {
+      e.preventDefault();
+      aim(e.touches[0]);
+      });
+      svg.addEventListener("touchend", function(e) {
+      loose();
+      });
       function draw(e) { // pull back arrow
         randomAngle = Math.random() * Math.PI * 0.03 - 0.015;
         TweenMax.to(".arrow-angle use", 0.3, { opacity: 1});
